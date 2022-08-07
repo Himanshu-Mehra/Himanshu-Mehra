@@ -37,7 +37,7 @@ read -r cust_name
 # ip_connectivity() function is for testing the connectivty using ping command
 ip_connectivity() {
 	
-	echo -e "\nTesting connection with ${1}"
+	echo -e "\nTesting connection with ${1}:\n"
 
 	ip_addresses=$(cat components.txt | grep -i ${1} | awk '{ print $2 }')	
 	for i in $ip_addresses;
@@ -97,6 +97,7 @@ pipo_connectivity() {
 ram_check() {
 	sysram=$(free -g | awk '/Mem:/ {print $2}')
 	sysramg=$(free -h | awk '/Mem:/ {print $2}')
+	echo -e "Checking RAM provided to the server:\n"
 	if [[ "$ENVIR" == "1" ]]; then
 		if [ "$COMPONENT" == "1" ]; then
 			if [ $sysram -ge "16" ]; then
@@ -195,6 +196,7 @@ ram_check() {
 # cpu_check() function is for checking the vcpu provided to the component according to thier deployment environment
 cpu_check() {
 	syscpu=$(nproc)
+	echo -e "Checking vCPU provided to the server:\n"
 	if [[ "$ENVIR" == "1" ]]; then
 		if [ "$COMPONENT" == "1" ]; then
 			if [ $syscpu -ge "8" ]; then
@@ -300,6 +302,7 @@ store_check() {
 	dnifsize=$(df -h /DNIF | awk '/dev/ {print $2}')
 	rootsize=$(df -h / | awk '/dev/ {print $2}')
 	HOS=$(lsblk -o ROTA,MOUNTPOINT | grep -i "DNIF" | awk '{ print $1 }')
+	echo -e "Checking ""/DNIF"" partition size provided to the server:\n"
 	if [[ ! -z "$(df -h | grep "/DNIF")" ]]; then
 		if [[ "$ENVIR" == "1" ]]; then
 			if [ "$COMPONENT" == "1" ]; then
@@ -400,6 +403,7 @@ store_check() {
 
 	echo -e "----------------------------------------------------------------------------------\n"
 
+	echo -e "Checking ROOT partition size provided to the server:\n"
 	if [ $rsizeik -ge "209715200" ]; then
 		echo "Root '/' Partition Check Passed the Minimum Configuration"
 		echo "Root '/' Partition provided: $rootsize"
@@ -410,7 +414,7 @@ store_check() {
 
     echo -e "----------------------------------------------------------------------------------\n"
 
-	echo -e "Checking /DNIF Storage Type (HDD/SSD):"
+	echo -e "Checking /DNIF Storage Type (HDD/SSD):\n"
 	if [[ $HOS == "1" ]]; then
 		echo "The Provided ""/DNIF"" Partition is HDD"
 	elif [[ $HOS == "0" ]]; then
