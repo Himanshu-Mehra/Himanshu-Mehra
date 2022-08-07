@@ -300,99 +300,102 @@ store_check() {
 	dnifsize=$(df -h /DNIF | awk '/dev/ {print $2}')
 	rootsize=$(df -h / | awk '/dev/ {print $2}')
 	HOS=$(lsblk -o ROTA,MOUNTPOINT | grep -i "DNIF" | awk '{ print $1 }')
-
-	if [[ "$ENVIR" == "1" ]]; then
-		if [ "$COMPONENT" == "1" ]; then
-			if [ $dsizeik -ge "524288000" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
+	if [[ ! -z "$(df -h | grep "/DNIF")" ]]; then
+		if [[ "$ENVIR" == "1" ]]; then
+			if [ "$COMPONENT" == "1" ]; then
+				if [ $dsizeik -ge "524288000" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "2" ]; then
+				if [ $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "3" ]; then
+				if [ $dsizeik -ge "524288000" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "4" ]; then
+				if [ $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "5" ]; then
+				if [ $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
+			fi
+		elif [ "$ENVIR" == "2" ]; then
+			if [ "$COMPONENT" == "1" ]; then
+				if [  $dsizeik -ge "1048576000" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 1TB"
+				fi
+			fi
+			if [ "$COMPONENT" == "2" ]; then
+				if [  $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "3" ]; then
+				if [  $dsizeik -ge "524288000" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "4" ]; then
+				if [  $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
+			fi
+			if [ "$COMPONENT" == "5" ]; then
+				if [  $dsizeik -ge "335544320" ]; then
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize"
+				else
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
+					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
+				fi
 			fi
 		fi
-		if [ "$COMPONENT" == "2" ]; then
-			if [ $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "3" ]; then
-			if [ $dsizeik -ge "524288000" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "4" ]; then
-			if [ $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "5" ]; then
-			if [ $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
-	elif [ "$ENVIR" == "2" ]; then
-		if [ "$COMPONENT" == "1" ]; then
-			if [  $dsizeik -ge "1048576000" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 1TB"
-			fi
-		fi
-		if [ "$COMPONENT" == "2" ]; then
-			if [  $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "3" ]; then
-			if [  $dsizeik -ge "524288000" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "4" ]; then
-			if [  $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
-		if [ "$COMPONENT" == "5" ]; then
-			if [  $dsizeik -ge "335544320" ]; then
-				echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize"
-			else
-				echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment"
-				echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB"
-			fi
-		fi
+	else
+		echo -e "The ""/DNIF"" Partition is not provided "
 	fi
 
 	echo -e "----------------------------------------------------------------------------------\n"
