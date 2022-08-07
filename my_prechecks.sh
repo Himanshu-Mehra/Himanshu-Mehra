@@ -407,9 +407,9 @@ store_check() {
 
     echo -e "----------------------------------------------------------------------------------\n"
 
-	if [ $HOS == "1" ]; then
+	if [[ $HOS == "1" ]]; then
 		echo "The Provided ""/DNIF"" Partition is HDD"
-	elif [ $HOS == "0" ]; then
+	elif [[ $HOS == "0" ]]; then
 		echo "The Provided ""/DNIF"" Partition is SSD "
 	fi
 
