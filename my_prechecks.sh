@@ -407,10 +407,13 @@ store_check() {
 
     echo -e "----------------------------------------------------------------------------------\n"
 
+	echo -e "Checking /DNIF Storage Type (HDD/SSD):"
 	if [[ $HOS == "1" ]]; then
 		echo "The Provided ""/DNIF"" Partition is HDD"
 	elif [[ $HOS == "0" ]]; then
 		echo "The Provided ""/DNIF"" Partition is SSD "
+	else
+		echo "The ""/DNIF"" Partition is not provided "
 	fi
 
 }
