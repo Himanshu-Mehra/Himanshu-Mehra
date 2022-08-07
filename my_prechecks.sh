@@ -297,13 +297,13 @@ cpu_check() {
 #it will also check if the root "/" partition of minimum 200GB is provided or not. 
 store_check() {
 
-	dsizeik=$(df -k /DNIF | awk '/dev/ {print $2}')
 	rsizeik=$(df -k / | awk '/dev/ {print $2}')
-	dnifsize=$(df -h /DNIF | awk '/dev/ {print $2}')
 	rootsize=$(df -h / | awk '/dev/ {print $2}')
 	HOS=$(lsblk -o ROTA,MOUNTPOINT | grep -i "DNIF" | awk '{ print $1 }')
 	echo -e "Checking ""/DNIF"" partition size provided to the server:\n"
 	if [[ ! -z "$(df -h | grep "/DNIF")" ]]; then
+		dsizeik=$(df -k /DNIF | awk '/dev/ {print $2}')
+		dnifsize=$(df -h /DNIF | awk '/dev/ {print $2}')
 		if [[ "$ENVIR" == "1" ]]; then
 			if [ "$COMPONENT" == "1" ]; then
 				if [ $dsizeik -ge "524288000" ]; then
