@@ -621,6 +621,7 @@ case "${COMPONENT^^}" in
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Pico"
 		ip_connectivity "Adapter"
+		ip_connectivity "Core"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
