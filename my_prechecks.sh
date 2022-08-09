@@ -160,46 +160,46 @@ ram_check() {
 	elif [ "$ENVIR" == "2" ]; then
 		if [ "$COMPONENT" == "1" ]; then
 			if [ $sysram -ge "32" ]; then
-				echo "RAM Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg" | tee -a ./prechecks.log
 			else
-				echo "RAM Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg. It should be atleast 32GB" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "2" ]; then
 			if [ $sysram -ge "32" ]; then
-				echo "RAM Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg" | tee -a ./prechecks.log
 			else
-				echo "RAM Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg. It should be atleast 32GB"  | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "3" ]; then
 			if [ $sysram -ge "64" ]; then
-				echo "RAM Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg" | tee -a ./prechecks.log
 			else
-				echo "RAM Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg. It should be atleast 64GB" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "4" ]; then
 			if [ $sysram -ge "32" ]; then
-				echo "RAM Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg" | tee -a ./prechecks.log
 			else
-				echo "RAM Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg. It should be atleast 32GB" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "5" ]; then
 			if [ $sysram -ge "32" ]; then
-				echo "RAM Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg" | tee -a ./prechecks.log
 			else
-				echo "RAM Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "RAM Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "RAM provided: $sysramg. It should be atleast 32GB" | tee -a ./prechecks.log
 			fi
 		fi
@@ -259,46 +259,46 @@ cpu_check() {
 	elif [ "$ENVIR" == "2" ]; then
 		if [ "$COMPONENT" == "1" ]; then
 			if [ $syscpu -ge "16" ]; then
-				echo "vCPU Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu" | tee -a ./prechecks.log
 			else
-				echo "vCPU Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu. It should be atleast 16vCPU" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "2" ]; then
 			if [ $syscpu -ge "16" ]; then
-				echo "vCPU Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu" | tee -a ./prechecks.log
 			else
-				echo "vCPU Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu. It should be atleast 16vCPU" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "3" ]; then
 			if [ $syscpu -ge "32" ]; then
-				echo "vCPU Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu" | tee -a ./prechecks.log
 			else
-				echo "vCPU Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu. It should be atleast 32vCPU" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "4" ]; then
 			if [ $syscpu -ge "16" ]; then
-				echo "vCPU Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu" | tee -a ./prechecks.log
 			else
-				echo "vCPU Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu. It should be atleast 16vCPU" | tee -a ./prechecks.log
 			fi
 		fi
 		if [ "$COMPONENT" == "5" ]; then
 			if [ $syscpu -ge "16" ]; then
-				echo "vCPU Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu" | tee -a ./prechecks.log
 			else
-				echo "vCPU Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+				echo "vCPU Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 				echo "vCPU provided: $syscpu. It should be atleast 16vCPU" | tee -a ./prechecks.log
 			fi
 		fi
@@ -366,46 +366,46 @@ store_check() {
 		elif [ "$ENVIR" == "2" ]; then
 			if [ "$COMPONENT" == "1" ]; then
 				if [  $dsizeik -ge "1048576000" ]; then
-					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize" | tee -a ./prechecks.log
 				else
-					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize. It should be atleast 1TB" | tee -a ./prechecks.log
 				fi
 			fi
 			if [ "$COMPONENT" == "2" ]; then
 				if [  $dsizeik -ge "335544320" ]; then
-					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize" | tee -a ./prechecks.log
 				else
-					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB" | tee -a ./prechecks.log
 				fi
 			fi
 			if [ "$COMPONENT" == "3" ]; then
 				if [  $dsizeik -ge "524288000" ]; then
-					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize" | tee -a ./prechecks.log
 				else
-					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize. It should be atleast 500GB" | tee -a ./prechecks.log
 				fi
 			fi
 			if [ "$COMPONENT" == "4" ]; then
 				if [  $dsizeik -ge "335544320" ]; then
-					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize" | tee -a ./prechecks.log
 				else
-					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB" | tee -a ./prechecks.log
 				fi
 			fi
 			if [ "$COMPONENT" == "5" ]; then
 				if [  $dsizeik -ge "335544320" ]; then
-					echo "/DNIF Partition Check Passed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Passed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize" | tee -a ./prechecks.log
 				else
-					echo "/DNIF Partition Check Failed the Minimum Configuration for Test Environment" | tee -a ./prechecks.log
+					echo "/DNIF Partition Check Failed the Minimum Configuration for Production Environment" | tee -a ./prechecks.log
 					echo "/DNIF Partition provided: $dnifsize. It should be atleast 320GB" | tee -a ./prechecks.log
 				fi
 			fi
