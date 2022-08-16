@@ -486,7 +486,8 @@ proxy_check() {
                 echo "No proxy found on the server" | tee -a ./prechecks.log
         elif [[ ! -z "$(env | grep -i "proxy")" ]]; then
                 echo -e "Proxy found on the server:\n" | tee -a ./prechecks.log
-                $(env | grep -i "proxy") | tee -a ./prechecks.log
+                envis=$(env | grep -i "proxy")
+                echo ${envis} | tee -a ./prechecks.log
         fi
 }
 
