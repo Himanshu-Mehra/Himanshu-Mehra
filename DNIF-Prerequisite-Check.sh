@@ -303,6 +303,14 @@ cpu_check() {
 			fi
 		fi
 	fi
+
+	echo -e "\nlscpu output:"
+	echo $(lscpu | grep "CPU(s):" | grep -v "NUMA node0")
+	echo $(lscpu | grep "On-line CPU(s) list:")
+	echo $(lscpu | grep "Thread(s) per core:")
+	echo $(lscpu | grep "Core(s) per socket:")
+	echo $(lscpu | grep "Socket(s):")
+
 }
 
 
