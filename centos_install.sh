@@ -25,7 +25,33 @@ function compose_check() {
 
 }
 
+function compose_check_centos() {
+	if [ -x "$(command -v docker-compose)" ]; then
+		version=$(docker-compose --version |cut -d ' ' -f3 | cut -d ',' -f1)
+		if [[ "$version" != "1.23.1" ]]; then
+			echo -n "[-] Finding docker-compose installation - found incompatible version"
+			echo -e "... \e[0;31m[ERROR] \e[0m\n"
+			echo -e "[-] Updating docker-compose\n"
+			sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
+			sudo chmod +x /usr/local/bin/docker-compose &>> /DNIF/install.log
+			echo -e "[-] Installing docker-compose - ... \e[1;32m[DONE] \e[0m\n"
+		else
+			echo -e "[-] docker-compose up-to-date\n"
+			echo -e "[-] Installing docker-compose - ... \e[1;32m[DONE] \e[0m\n"
+		fi
+	else
+		echo -e "[-] Finding docker-compose installation - ... \e[1;31m[NEGATIVE] \e[0m\n"
+		echo -e "[-] Installing docker-compose\n"
+		sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
+		sudo chmod +x /usr/local/bin/docker-compose &>> /DNIF/install.log
+		filedc="/usr/bin/docker-compose"
+		if [ ! -f "$filedc " ]; then
+			sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose &>> /DNIF/install.log
+		fi
+    echo -e "[-] Installing docker-compose - ... \e[1;32m[DONE] \e[0m\n"
+	fi
 
+}
 
 function docker_check() {
 	echo -e "[-] Finding docker installation\n"
@@ -109,6 +135,25 @@ function docker_install_centos() {
 	sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo&>> /DNIF/install.log
+  echo -e "[centos-extras]
+name=Centos extras - $"basearch"
+baseurl=http://mirror.centos.org/centos/7/extras/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=http://centos.org/keys/RPM-GPG-KEY-CentOS-7">>/etc/yum.repos.d/docker-ce.repo
+
+	file1="/usr/bin/slirp4netns"
+	if [ ! -f "$file1 " ]; then
+		yum install -y slirp4netns&>> /DNIF/install.log
+	fi
+	file2="/usr/bin/fuse-overlayfs"
+	if [ ! -f "$file2 " ]; then
+		yum install -y fuse-overlayfs&>> /DNIF/install.log
+	fi
+	file3="/usr/bin/container-selinux"
+	if [ ! -f "$file3 " ]; then
+		yum install -y container-selinux&>> /DNIF/install.log
+	fi
 	sudo yum install -y docker-ce docker-ce-cli containerd.io&>> /DNIF/install.log
 	sudo systemctl start docker&>> /DNIF/install.log
 	sudo systemctl enable docker.service&>> /DNIF/install.log
@@ -971,7 +1016,7 @@ else
 					set_proxy $ProxyUrl
 				fi
 				docker_check_centos
-				compose_check
+				compose_check_centos
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
 				if [[ $ProxyUrl ]]; then
@@ -1108,7 +1153,7 @@ services:
 			2)
 				echo -e "[-] Installing the Console \n"
 				docker_check_centos
-				compose_check
+				compose_check_centos
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
         file="/usr/bin/wget"
@@ -1141,7 +1186,7 @@ services:
 			3)
 				echo -e "[-] Installing the Datanode\n"
 				docker_check_centos
-				compose_check
+				compose_check_centos
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
 
@@ -1247,7 +1292,7 @@ services:
 					set_proxy $ProxyUrl
 				fi
 				docker_check_centos
-				compose_check
+				compose_check_centos
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
 				file="/usr/bin/wget"
