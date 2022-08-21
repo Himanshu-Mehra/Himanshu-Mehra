@@ -141,16 +141,15 @@ enabled=1
 gpgcheck=1
 gpgkey=http://centos.org/keys/RPM-GPG-KEY-CentOS-7">>/etc/yum.repos.d/docker-ce.repo
 
-	file1="/usr/bin/slirp4netns"
-	if [ ! -f "$file1 " ]; then
+	if [ ! -x "$(command -v slirp4netns)" ]; then
 		yum install -y slirp4netns&>> /DNIF/install.log
 	fi
-	file2="/usr/bin/fuse-overlayfs"
-	if [ ! -f "$file2 " ]; then
+
+	if [ ! -x "$(command -v fuse-overlayfs)" ]; then
 		yum install -y fuse-overlayfs&>> /DNIF/install.log
 	fi
-	file3="/usr/bin/container-selinux"
-	if [ ! -f "$file3 " ]; then
+
+	if [ ! -x "$(command -v container-selinux)" ]; then
 		yum install -y container-selinux&>> /DNIF/install.log
 	fi
 	sudo yum install -y docker-ce docker-ce-cli containerd.io&>> /DNIF/install.log
