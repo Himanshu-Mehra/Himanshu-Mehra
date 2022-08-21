@@ -45,7 +45,7 @@ function compose_check_centos() {
 		sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
 		sudo chmod +x /usr/local/bin/docker-compose &>> /DNIF/install.log
 		filedc="/usr/bin/docker-compose"
-		if [ ! -f "$filedc " ]; then
+		if [ ! -x "$(command -v docker-compose)" ]; then
 			sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose &>> /DNIF/install.log
 		fi
     echo -e "[-] Installing docker-compose - ... \e[1;32m[DONE] \e[0m\n"
