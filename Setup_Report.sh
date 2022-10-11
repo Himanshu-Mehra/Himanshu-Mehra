@@ -445,7 +445,8 @@ else
 			echo -e '$ podman exec $(podman ps -aqf "name=pico-v9") hostname\n' >> $cwd/Setup_Report_$dateis.log
 			podman exec $(podman ps -aqf "name=pico-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
-
+		fi
+	
 	fi
 
 	echo -e "$ uptime -p\n" >> $cwd/Setup_Report_$dateis.log
