@@ -533,7 +533,7 @@ else
 
 	echo -e "$ netstat -auntp | grep -i listen \n" >> $cwd/Setup_Report_$dateis.log
 
-	netstat -auntp | grep -i listen
+	netstat -auntp | grep -i listen >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
