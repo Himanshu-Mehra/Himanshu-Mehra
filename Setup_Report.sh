@@ -531,6 +531,12 @@ else
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+	echo -e "$ netstat -auntp | grep -i listen \n" >> $cwd/Setup_Report_$dateis.log
+
+	netstat -auntp | grep -i listen
+
+	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
 	cd $cwd
 	tar fcz OS_logs_$dateis.tar.gz --absolute-names /var/log/syslog* /var/log/kern.log* /var/log/dmesg*
 	
