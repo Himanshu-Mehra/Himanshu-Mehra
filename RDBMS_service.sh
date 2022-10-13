@@ -27,3 +27,11 @@ systemctl is-enabled rdbms_logshipper_$fina.service
 systemctl start rdbms_logshipper_$fina.service
 
 systemctl status rdbms_logshipper_$fina.service
+
+#write out current crontab
+crontab -l > mycronservice
+#echo new cron into cron file
+echo "*/30 * * * * systemctl restart rdbms_logshipper_$fina.service" >> mycronservice
+#install new cron file
+crontab mycronservice
+rm mycronservice
