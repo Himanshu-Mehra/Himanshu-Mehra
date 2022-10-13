@@ -42,29 +42,31 @@ echo -e $cust_name >> ./prechecks.log
 # ip_connectivity() function is for testing the connectivty using ping command
 ip_connectivity() {
 	
-	echo -e "\nTesting connection with ${1}:\n" | tee -a ./prechecks.log
+	echo -e "\nTesting connection with ${1} IP:\n" | tee -a ./prechecks.log
 
 	ip_addresses=$(cat components.txt | grep -i ${1} | awk '{ print $2 }')	
 	for i in $ip_addresses;
 	do
-		ping -c 2 $i &> /dev/null &&
-    			printf "Connectivity with $i.......................................Passed \n" | tee -a ./prechecks.log ||
-    			printf "Connectivity with $i.......................................Failed \n" | tee -a ./prechecks.log
+		printf "Connectivity with $i on port 22\n" | tee -a ./prechecks.log
+		nc -z -v $i 22
+		nc -z -v $i 22 &>> prechecks.log
 	done
+
+	echo -e "\nTesting connection with ${1} Hostname:\n" | tee -a ./prechecks.log
 	
 	hostname=$(cat components.txt | grep -i ${1} | awk '{ print $3 }')
 	for j in $hostname;
 	do
-		hip=$(ping -c 1 $j | grep -i "bytes of data" | awk '{ print $3 }')
-		ping -c 2 $j &> /dev/null &&
-    			printf "Connectivity with $j $hip.......................................Passed \n" | tee -a ./prechecks.log ||
-    			printf "Connectivity with $j.......................................Failed \n" | tee -a ./prechecks.log
+		hip=$(dig $j +short)
+		printf "Connectivity with $j ($hip) on port 22\n" | tee -a ./prechecks.log
+		nc -z -v $j 22
+		nc -z -v $j 22 &>> prechecks.log
 	done
 }
 
 pipo_connectivity() {
 	
-	echo -e "\nTesting connection with Adapter\n" | tee -a ./prechecks.log
+	echo -e "\nTesting port connectivity with Adapter IP:\n" | tee -a ./prechecks.log
 
 	ip_addresses=$(cat components.txt | grep -i "adapter" | awk '{ print $2 }')	
 	for i in $ip_addresses;
@@ -74,6 +76,8 @@ pipo_connectivity() {
 		nc -z -v $i 7426 &>> prechecks.log
 	done
 	
+	echo -e "\nTesting port connectivity with Adapter Hostname:\n" | tee -a ./prechecks.log
+
 	hostname=$(cat components.txt | grep -i "adapter" | awk '{ print $3 }')
 	for j in $hostname;
 	do
@@ -81,8 +85,10 @@ pipo_connectivity() {
 		nc -z -v $j 7426 
 		nc -z -v $j 7426 &>> prechecks.log
 	done
+	
+	echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 
-	echo -e "\nTesting connection with Core\n" | tee -a ./prechecks.log
+	echo -e "\nTesting port connectivity with Core IP:\n" | tee -a ./prechecks.log
 	cip=$(cat components.txt | grep -i "core" | awk '{ print $2 }')	
 	chn=$(cat components.txt | grep -i "core" | awk '{ print $3 }')
 	printf "Connectivity with $cip on port 1443\n" | tee -a ./prechecks.log
@@ -94,6 +100,9 @@ pipo_connectivity() {
 	printf "Connectivity with $cip on port 8765\n" | tee -a ./prechecks.log
 		nc -z -v $cip 8765 
 		nc -z -v $cip 8765 &>> prechecks.log
+	
+	echo -e "\nTesting port connectivity with Core Hostname:\n" | tee -a ./prechecks.log
+
 	printf "Connectivity with $chn on port 1443\n" | tee -a ./prechecks.log
 		nc -z -v $chn 1443 
 		nc -z -v $chn 1443 &>> prechecks.log
@@ -505,8 +514,11 @@ case "${COMPONENT^^}" in
 	1)
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Core"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Datanode"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Adapter"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Console"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
@@ -539,8 +551,11 @@ case "${COMPONENT^^}" in
 	2)
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Core"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Datanode"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Adapter"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Console"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
@@ -573,8 +588,11 @@ case "${COMPONENT^^}" in
 	3)
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Core"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Datanode"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Adapter"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Console"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
@@ -607,8 +625,11 @@ case "${COMPONENT^^}" in
 	4)
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Core"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Datanode"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Adapter"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Console"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
@@ -641,7 +662,9 @@ case "${COMPONENT^^}" in
 	5)
 		echo -e "----------------------------------------------------------------------------------" | tee -a ./prechecks.log
 		ip_connectivity "Pico"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Adapter"
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ip_connectivity "Core"
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		ram_check
