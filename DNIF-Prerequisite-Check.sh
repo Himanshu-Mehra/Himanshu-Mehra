@@ -521,6 +521,9 @@ case "${COMPONENT^^}" in
 		echo -e "Network interface configuration:\n" | tee -a ./prechecks.log
 		ifconfig | tee -a ./prechecks.log
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
+		echo -e "cat /etc/hosts file:\n" | tee -a ./prechecks.log
+		cat /etc/hosts | tee -a ./prechecks.log
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		port_connectivity
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		url_connectiity
@@ -551,6 +554,9 @@ case "${COMPONENT^^}" in
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		echo -e "Network interface configuration:\n" | tee -a ./prechecks.log
 		ifconfig | tee -a ./prechecks.log
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
+		echo -e "cat /etc/hosts file:\n" | tee -a ./prechecks.log
+		cat /etc/hosts | tee -a ./prechecks.log
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		port_connectivity
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
@@ -583,6 +589,9 @@ case "${COMPONENT^^}" in
 		echo -e "Network interface configuration:\n" | tee -a ./prechecks.log
 		ifconfig | tee -a ./prechecks.log
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
+		echo -e "cat /etc/hosts file:\n" | tee -a ./prechecks.log
+		cat /etc/hosts | tee -a ./prechecks.log
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		port_connectivity
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		url_connectiity
@@ -614,6 +623,9 @@ case "${COMPONENT^^}" in
 		echo -e "Network interface configuration:\n" | tee -a ./prechecks.log
 		ifconfig | tee -a ./prechecks.log
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
+		echo -e "cat /etc/hosts file:\n" | tee -a ./prechecks.log
+		cat /etc/hosts | tee -a ./prechecks.log
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		port_connectivity
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		url_connectiity
@@ -643,6 +655,9 @@ case "${COMPONENT^^}" in
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		echo -e "Network interface configuration:\n" | tee -a ./prechecks.log
 		ifconfig | tee -a ./prechecks.log
+		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
+		echo -e "cat /etc/hosts file:\n" | tee -a ./prechecks.log
+		cat /etc/hosts | tee -a ./prechecks.log
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
 		port_connectivity
 		echo -e "----------------------------------------------------------------------------------\n" | tee -a ./prechecks.log
