@@ -253,6 +253,14 @@ else
 			echo -e '$ docker exec $(docker ps -aqf "name=pico-v9") hostname\n' >> $cwd/Setup_Report_$dateis.log
 			docker exec $(docker ps -aqf "name=pico-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+			
+			echo -e "$ docker exec $(docker ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
    		fi
 
@@ -445,6 +453,14 @@ else
 			echo -e '$ podman exec $(podman ps -aqf "name=pico-v9") hostname\n' >> $cwd/Setup_Report_$dateis.log
 			podman exec $(podman ps -aqf "name=pico-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
 		fi
 	
 	fi
