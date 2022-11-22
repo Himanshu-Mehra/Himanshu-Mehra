@@ -474,7 +474,7 @@ port_connectivity() {
 #URL connectivity checks
 url_connectiity() {
 	echo -e "Connectivity Statistics:\n" | tee -a ./prechecks.log
-	for site in  https://github.com/ https://raw.github.com/ https://hub.docker.com/  https://hog.dnif.it/
+	for site in  https://github.com/ https://raw.github.com/ https://hub.docker.com/ https://www.docker.io/ https://hog.dnif.it/
 	do
 		if wget -O - -q -t 1 --timeout=6 --spider -S "$site" 2>&1 | grep -w "200\|301" ; then
 	    	printf "Connectivity with $site.................................Passed \n" | tee -a ./prechecks.log
