@@ -46,6 +46,8 @@ else
 
 	timedatectl >> $cwd/Setup_Report_$dateis.log
 
+	echo -ne '##                        (10%)\r'
+
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 	
 	if [ -r /etc/os-release ]; then
@@ -66,8 +68,12 @@ else
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+		echo -ne '####                      (20%)\r'
+
 		if [[ $(docker ps -a --format '{{.Names}}' | grep -w console-v9) == "console-v9" ]]; then
 			
+			echo -ne '######                    (30%)\r'
+
 			cd /DNIF/LC/ 
 
 			echo -e "$ cat docker-compose.yaml	(CONSOLE)\n" >> $cwd/Setup_Report_$dateis.log
@@ -99,6 +105,8 @@ else
 
 		if [[ $(docker ps -a --format '{{.Names}}' | grep -w datanode-v9) == "datanode-v9" ]]; then
 			if [[ -e /DNIF/DL/docker-compose.yaml ]]; then
+
+				echo -ne '######                    (30%)\r'
 				
 				cd /DNIF/DL
 
@@ -143,6 +151,8 @@ else
 		fi
 
 		if [[ $(docker ps -a --format '{{.Names}}' | grep -w core-v9) == "core-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 			
 			cd /DNIF/
 
@@ -195,6 +205,8 @@ else
 		fi
 
 		if [[ $(docker ps -a --format '{{.Names}}' | grep -w adapter-v9) == "adapter-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 	        
 	        cd /DNIF/AD/
 
@@ -226,6 +238,8 @@ else
     	fi
 
     	if [[ $(docker ps -a --format '{{.Names}}' | grep -w pico-v9) == "pico-v9" ]]; then
+
+    		echo -ne '######                    (30%)\r'
 	        
 	        cd /DNIF/PICO/
 
@@ -280,7 +294,11 @@ else
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+		echo -ne '####                      (20%)\r'
+
 		if [[ $(podman ps -a --format '{{.Names}}' | grep -w console-v9) == "console-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 			
 			cd /DNIF/LC/ 
 
@@ -312,6 +330,8 @@ else
 		fi
 
 		if [[ $(podman ps -a --format '{{.Names}}' | grep -w datanode-v9) == "datanode-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 
 			if [[ -e /DNIF/DL/podman-compose.yaml ]]; then
 				
@@ -360,6 +380,8 @@ else
 		fi
 
 		if [[ $(podman ps -a --format '{{.Names}}' | grep -w core-v9) == "core-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 			
 			cd /DNIF/
 
@@ -395,6 +417,8 @@ else
 		fi
 
 		if [[ $(podman ps -a --format '{{.Names}}' | grep -w adapter-v9) == "adapter-v9" ]]; then
+
+			echo -ne '######                    (30%)\r'
 	        
 	        cd /DNIF/AD/
 
@@ -426,6 +450,8 @@ else
     	fi
 
     	if [[ $(podman ps -a --format '{{.Names}}' | grep -w pico-v9) == "pico-v9" ]]; then
+
+    		echo -ne '######                    (30%)\r'
 	        
 	        cd /DNIF/PICO/
 
@@ -469,11 +495,15 @@ else
 
 	uptime -p >> $cwd/Setup_Report_$dateis.log
 
+	echo -ne '########                  (40%)\r'
+
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "$ last reboot\n" >> $cwd/Setup_Report_$dateis.log
 
 	last reboot >> $cwd/Setup_Report_$dateis.log
+
+	echo -ne '##########                (50%)\r'
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
@@ -481,17 +511,23 @@ else
 
 	df -h >> $cwd/Setup_Report_$dateis.log
 
+	echo -ne '############              (60%)\r'
+
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "$ free -h\n" >> $cwd/Setup_Report_$dateis.log
 
 	free -h >> $cwd/Setup_Report_$dateis.log
 
+	echo -ne '##############            (70%)\r'
+
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "$ ufw status \n" >> $cwd/Setup_Report_$dateis.log
 
 	ufw status >> $cwd/Setup_Report_$dateis.log
+
+	echo -ne '################          (80%)\r'
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
@@ -539,6 +575,8 @@ else
 
 	cat /etc/hosts >> $cwd/Setup_Report_$dateis.log
 
+	echo -ne '##################        (90%)\r'
+
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "$ hostname \n" >> $cwd/Setup_Report_$dateis.log
@@ -552,6 +590,8 @@ else
 	netstat -auntp | grep -i listen >> $cwd/Setup_Report_$dateis.log
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+	echo -ne '###################       (95%)\r'
 
 	cd $cwd
 	tar fcz OS_logs_$dateis.tar.gz --absolute-names /var/log/syslog* /var/log/kern.log* /var/log/dmesg*
@@ -589,5 +629,8 @@ else
 	if [[ -e ./ps_rss_$dateis.log ]]; then
 		rm -rf ./ps_rss_$dateis.log
 	fi
+
+	echo -ne '#######################   (100%)\r'
+	echo -ne '\n'
 
 fi
