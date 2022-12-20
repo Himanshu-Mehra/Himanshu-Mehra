@@ -514,6 +514,9 @@ else
 			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
 			podman exec $(podman ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+			
+			ip_connectivity
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 		fi
 	
