@@ -1025,7 +1025,7 @@ else
 	Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
 
 					sudo systemctl daemon-reload
-					sudo systemctl restart podman
+					sudo systemctl restart docker
 				fi
 
 
@@ -1152,8 +1152,24 @@ services:
 
 			2)
 				echo -e "[-] Installing the Console \n"
+				if [[ "$1" == "proxy" ]]; then
+					ProxyUrl=""
+					while [[ ! "$ProxyUrl" ]]; do
+						echo -e "ENTER Proxy url: \c"
+						read -r ProxyUrl
+					done
+					set_proxy $ProxyUrl
+				fi
 				docker_check_centos
 				compose_check_centos
+				if [[ $ProxyUrl ]]; then
+					mkdir -p /etc/systemd/system/docker.service.d
+					echo -e "[Service]
+				Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
+
+					sudo systemctl daemon-reload
+					sudo systemctl restart docker
+				fi
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
         file="/usr/bin/wget"
@@ -1185,8 +1201,24 @@ services:
 				;;
 			3)
 				echo -e "[-] Installing the Datanode\n"
+				if [[ "$1" == "proxy" ]]; then
+					ProxyUrl=""
+					while [[ ! "$ProxyUrl" ]]; do
+						echo -e "ENTER Proxy url: \c"
+						read -r ProxyUrl
+					done
+					set_proxy $ProxyUrl
+				fi
 				docker_check_centos
 				compose_check_centos
+				if [[ $ProxyUrl ]]; then
+					mkdir -p /etc/systemd/system/docker.service.d
+					echo -e "[Service]
+				Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
+
+					sudo systemctl daemon-reload
+					sudo systemctl restart docker
+				fi
 				sysctl_check
 				setenforce 0&>> /DNIF/install.log
 
@@ -1307,7 +1339,7 @@ services:
 	Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
 
 					sudo systemctl daemon-reload
-					sudo systemctl restart podman
+					sudo systemctl restart docker
 				fi
 				mkdir -p /DNIF/AD&>> /DNIF/install.log
 				mkdir -p /DNIF/backup/ad&>> /DNIF/install.log
