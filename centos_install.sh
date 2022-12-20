@@ -32,7 +32,7 @@ function compose_check_centos() {
 			echo -n "[-] Finding docker-compose installation - found incompatible version"
 			echo -e "... \e[0;31m[ERROR] \e[0m\n"
 			echo -e "[-] Updating docker-compose\n"
-			sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
+			sudo curl -k -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
 			sudo chmod +x /usr/local/bin/docker-compose &>> /DNIF/install.log
 			echo -e "[-] Installing docker-compose - ... \e[1;32m[DONE] \e[0m\n"
 		else
@@ -42,7 +42,7 @@ function compose_check_centos() {
 	else
 		echo -e "[-] Finding docker-compose installation - ... \e[1;31m[NEGATIVE] \e[0m\n"
 		echo -e "[-] Installing docker-compose\n"
-		sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
+		sudo curl -k -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose &>> /DNIF/install.log
 		sudo chmod +x /usr/local/bin/docker-compose &>> /DNIF/install.log
 		filedc="/usr/bin/docker-compose"
 		if [ ! -f "$filedc " ]; then
