@@ -39,6 +39,31 @@ else
 	if [[ -e ./System_Report_$dateis.tar.gz ]]; then
 		rm -rf ./System_Report_$dateis.tar.gz
 	fi
+	
+	ip_connectivity() {
+    
+	    ip_addresses=$(cat /DNIF/PICO/docker-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+
+	    echo -e "Testing connection with Core IP($ip_addresses):\n" >> $cwd/Setup_Report_$dateis.log
+
+	    for i in $ip_addresses;
+	    do
+
+		printf "Testing connectivity with $i on port 1443\n" >> $cwd/Setup_Report_$dateis.log
+		echo -e "$ nc -z -v $i 1443" >> $cwd/Setup_Report_$dateis.log
+		nc -z -v $i 1443 &>> $cwd/Setup_Report_$dateis.log
+
+		printf "\nTesting connectivity with $i on port 8086\n" >> $cwd/Setup_Report_$dateis.log
+		echo -e "$ nc -z -v $i 8086" >> $cwd/Setup_Report_$dateis.log
+		nc -z -v $i 8086 &>> $cwd/Setup_Report_$dateis.log
+
+		printf "\nTesting connectivity with $i on port 8765\n" >> $cwd/Setup_Report_$dateis.log
+		echo -e "$ nc -z -v $i 8765" >> $cwd/Setup_Report_$dateis.log
+		nc -z -v $i 8765 &>> $cwd/Setup_Report_$dateis.log
+
+	    done
+
+	}
 
 	echo -e "\n================================Setup Report=================================\n" >> $cwd/Setup_Report_$dateis.log
 
@@ -274,6 +299,9 @@ else
 
 			echo -e "$ docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
 			docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+			
+			ip_connectivity
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
    		fi
