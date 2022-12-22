@@ -1022,7 +1022,7 @@ else
 				if [[ $ProxyUrl ]]; then
 					mkdir -p /etc/systemd/system/docker.service.d
 					echo -e "[Service]
-	Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
+					Environment=\"HTTPS_PROXY=$ProxyUrl\"">/etc/systemd/system/docker.service.d/http-proxy.conf
 
 					sudo systemctl daemon-reload
 					sudo systemctl restart docker
@@ -1075,11 +1075,17 @@ else
        					fi
 				fi
 
-				mkdir -p /DNIF/CO&>> /DNIF/install.log
-				mkdir -p /DNIF/common&>> /DNIF/install.log
-				mkdir -p /DNIF/backup/core&>> /DNIF/install.log
 				echo -e "\n[-] Pulling docker Image for CORE\n"
-				sudo docker pull docker.io/dnif/core:$tag
+				docker pull docker.io/dnif/core:$tag
+				echo -e "[-] Pulling docker Image for Datanode\n"
+				docker pull docker.io/dnif/datanode:$tag
+
+				sudo mkdir -p /DNIF
+				sudo mkdir -p /DNIF/CO
+				sudo mkdir -p /DNIF/DL
+				sudo mkdir -p /DNIF/common
+				sudo mkdir -p /DNIF/backup/core
+				sudo mkdir -p /DNIF/backup/dn
 
 				COREIP=""
 				while [[ ! $COREIP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; do
@@ -1090,7 +1096,7 @@ else
 				sudo echo -e "version: "\'2.0\'"
 services:
   core:
-    image: docker.io/dnif/core:$tag
+    image: dnif/core:$tag
     network_mode: "\'host\'"
     restart: unless-stopped
     cap_add:
@@ -1100,27 +1106,16 @@ services:
       - /DNIF/common:/common
       - /DNIF/backup/core:/backup
     environment:
-      - "\'PROXY="$ProxyUrl"\'"
       - "\'CORE_IP="$COREIP"\'"
+      - "\'PROXY="$ProxyUrl"\'"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-    container_name: core-v9">>/DNIF/docker-compose.yaml
-    				cd /DNIF
-				echo -e "[-] Starting container... \n"
-				docker-compose up -d
-				echo -e "[-] Starting container... \e[1;32m[DONE] \e[0m\n"
-
-    				mkdir -p /DNIF/DL&>> /DNIF/install.log
-				mkdir -p /DNIF/backup/dn&>> /DNIF/install.log
-				echo -e "[-] Pulling docker Image for Datanode\n"
-				sudo docker pull docker.io/dnif/datanode:$tag
-
-				echo -e "version: "\'2.0\'"
-services:
-  datanode:
-    image: docker.io/dnif/datanode:$tag
+    container_name: core-v9
+  datanode-master:
+    privileged: true
+    image: dnif/datanode:$tag
     network_mode: "\'host\'"
     restart: unless-stopped
     cap_add:
@@ -1131,22 +1126,19 @@ services:
       - /opt:/opt
       - /etc/systemd/system:/etc/systemd/system
       - /DNIF/common:/common
-      - /DNIF/backup:/backup
+      - /DNIF/backup/dn:/backup
     environment:
       - "\'CORE_IP="$COREIP"\'"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-    container_name: datanode-v9">>/DNIF/DL/docker-compose.yaml
-				cd /DNIF/DL
+    container_name: datanode-master-v9">>/DNIF/docker-compose.yaml
+				cd /DNIF
 				echo -e "[-] Starting container... \n"
 				docker-compose up -d
-				echo -e "[-] Starting container ... \e[1;32m[DONE] \e[0m"
-
-
-
-
+				echo -e "[-] Starting container... \e[1;32m[DONE] \e[0m\n"
+				docker ps
 				echo -e "** Congratulations you have successfully installed the CORE \n"
 				;;
 
