@@ -260,6 +260,18 @@ else
 			docker exec $(docker ps -aqf "name=adapter-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+			echo -e "$ docker exec $(docker ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ docker exec $(docker ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ docker exec $(docker ps -aqf "name=adapter-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=adapter-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
     	fi
 
     	if [[ $(docker ps -a --format '{{.Names}}' | grep -w pico-v9) == "pico-v9" ]]; then
@@ -297,6 +309,10 @@ else
 			docker exec $(docker ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+			echo -e "$ docker exec $(docker ps -aqf "name=pico-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues'" >> $cwd/Setup_Report_$dateis.log
+			docker exec $(docker ps -aqf "name=pico-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
 			echo -e "$ docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
 			docker exec $(docker ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
@@ -305,6 +321,12 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
    		fi
+
+   		echo -e "$ ufw status \n" >> $cwd/Setup_Report_$dateis.log
+
+		ufw status >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	fi
 
@@ -475,6 +497,18 @@ else
 			podman exec $(podman ps -aqf "name=adapter-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+			echo -e "$ podman exec $(podman ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ podman exec $(podman ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=adapter-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ podman exec $(podman ps -aqf "name=adapter-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=adapter-v9") bash -c '/etc/init.d/redis-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
     	fi
 
     	if [[ $(podman ps -a --format '{{.Names}}' | grep -w pico-v9) == "pico-v9" ]]; then
@@ -507,8 +541,13 @@ else
 			echo -e '$ podman exec $(podman ps -aqf "name=pico-v9") hostname\n' >> $cwd/Setup_Report_$dateis.log
 			podman exec $(podman ps -aqf "name=pico-v9") hostname >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
 			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
 			podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status' >> $cwd/Setup_Report_$dateis.log
+			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && /etc/init.d/rabbitmq-server status'" >> $cwd/Setup_Report_$dateis.log
+			podman exec $(podman ps -aqf "name=pico-v9") bash -c 'source /etc/profile && rabbitmqctl list_queues' >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 			echo -e "$ podman exec $(podman ps -aqf "name=pico-v9") bash -c '/etc/init.d/redis-server status'" >> $cwd/Setup_Report_$dateis.log
@@ -519,6 +558,12 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 		fi
+
+		echo -e "$ systemctl staus firewalld.service \n" >> $cwd/Setup_Report_$dateis.log
+
+		systemctl staus firewalld.service >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 	
 	fi
 
@@ -554,17 +599,11 @@ else
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
-	echo -e "$ ufw status \n" >> $cwd/Setup_Report_$dateis.log
-
-	ufw status >> $cwd/Setup_Report_$dateis.log
-
-	echo -ne '################          (80%)\r'
-
-	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
-
 	echo -e "$ env | grep -i proxy \n" >> $cwd/Setup_Report_$dateis.log
 
 	env | grep -i proxy >> $cwd/Setup_Report_$dateis.log
+
+	echo -ne '################          (80%)\r'
 
 	echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
