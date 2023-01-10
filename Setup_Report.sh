@@ -93,6 +93,18 @@ else
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
+		echo -e "$ docker --version\n" >> $cwd/Setup_Report_$dateis.log
+
+		docker --version >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "$ docker-compose --version\n" >> $cwd/Setup_Report_$dateis.log
+
+		docker-compose --version >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
 		echo -ne '####                      (20%)\r'
 
 		if [[ $(docker ps -a --format '{{.Names}}' | grep -w console-v9) == "console-v9" ]]; then
@@ -341,6 +353,18 @@ else
 		echo -e "$ podman images --digests\n" >> $cwd/Setup_Report_$dateis.log
 
 		podman images --digests >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "$ podman --version\n" >> $cwd/Setup_Report_$dateis.log
+
+		podman --version >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
+
+		echo -e "$ podman-compose --version\n" >> $cwd/Setup_Report_$dateis.log
+
+		podman-compose --version >> $cwd/Setup_Report_$dateis.log
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
