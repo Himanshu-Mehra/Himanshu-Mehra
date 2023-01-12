@@ -386,7 +386,7 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 			echo -e "$ podman-compose logs	(CONSOLE)\n" >> $cwd/Setup_Report_$dateis.log
-			podman-compose logs >> $cwd/Setup_Report_$dateis.log
+			podman-compose logs 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 			echo -e '$ podman exec $(podman ps -aqf "name=console-v9") cat /etc/hosts\n' >> $cwd/Setup_Report_$dateis.log
@@ -421,7 +421,7 @@ else
 				echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 				echo -e "$ podman-compose logs	(DATANODE)\n" >> $cwd/Setup_Report_$dateis.log
-				podman-compose logs >> $cwd/Setup_Report_$dateis.log
+				podman-compose logs 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 				echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 				echo -e '$ podman exec $(podman ps -aqf "name=datanode-v9") cat /etc/hosts\n' >> $cwd/Setup_Report_$dateis.log
@@ -469,7 +469,7 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 			echo -e "$ podman-compose logs	(CORE)\n" >> $cwd/Setup_Report_$dateis.log
-			podman-compose logs >> $cwd/Setup_Report_$dateis.log
+			podman-compose logs 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 			echo -e '$ podman exec $(podman ps -aqf "name=core-v9") cat /etc/hosts\n' >> $cwd/Setup_Report_$dateis.log
@@ -506,7 +506,7 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	        echo -e "$ podman-compose logs (ADAPTER)\n" >> $cwd/Setup_Report_$dateis.log
-	        podman-compose logs >> $cwd/Setup_Report_$dateis.log
+	        podman-compose logs 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 	        echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	        echo -e '$ podman exec $(podman ps -aqf "name=adapter-v9") cat /etc/hosts\n' >> $cwd/Setup_Report_$dateis.log
@@ -551,7 +551,7 @@ else
 			echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	        echo -e "$ podman-compose logs	(PICO)\n" >> $cwd/Setup_Report_$dateis.log
-	        podman-compose logs >> $cwd/Setup_Report_$dateis.log
+	        podman-compose logs 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 	        echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 	        echo -e '$ podman exec $(podman ps -aqf "name=pico-v9") cat /etc/hosts\n' >> $cwd/Setup_Report_$dateis.log
