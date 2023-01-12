@@ -362,13 +362,13 @@ else
 
 		echo -e "$ podman --version\n" >> $cwd/Setup_Report_$dateis.log
 
-		podman --version >> $cwd/Setup_Report_$dateis.log
+		podman --version 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
 		echo -e "$ podman-compose --version\n" >> $cwd/Setup_Report_$dateis.log
 
-		podman-compose --version >> $cwd/Setup_Report_$dateis.log
+		podman-compose --version 2>/dev/null >> $cwd/Setup_Report_$dateis.log
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 
