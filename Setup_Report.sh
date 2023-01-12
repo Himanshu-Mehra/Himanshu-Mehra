@@ -67,7 +67,6 @@ else
 		nc -z -v $i 8765 &>> $cwd/Setup_Report_$dateis.log
 
 	    done
-
 	}
 
 	echo -e "\n================================Setup Report=================================\n" >> $cwd/Setup_Report_$dateis.log
