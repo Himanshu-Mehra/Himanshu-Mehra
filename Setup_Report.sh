@@ -44,9 +44,10 @@ else
     
 	    if [[ $os == "ubuntu" ]]; then
 	    	ip_addresses=$(cat /DNIF/PICO/docker-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+	    fi
 	    if [[ $os == "rhel" ]]; then
 	    	ip_addresses=$(cat /DNIF/PICO/podman-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
-
+	    fi
 
 	    echo -e "Testing connection with Core IP($ip_addresses):\n" >> $cwd/Setup_Report_$dateis.log
 
