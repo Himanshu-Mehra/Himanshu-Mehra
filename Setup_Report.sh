@@ -42,7 +42,11 @@ else
 	
 	ip_connectivity() {
     
-	    ip_addresses=$(cat /DNIF/PICO/docker-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+	    if [[ $os == "ubuntu" ]]; then
+	    	ip_addresses=$(cat /DNIF/PICO/docker-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+	    if [[ $os == "rhel" ]]; then
+	    	ip_addresses=$(cat /DNIF/PICO/podman-compose.yaml | grep -i core | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}')
+
 
 	    echo -e "Testing connection with Core IP($ip_addresses):\n" >> $cwd/Setup_Report_$dateis.log
 
@@ -583,9 +587,9 @@ else
 
 		fi
 
-		echo -e "$ systemctl staus firewalld.service \n" >> $cwd/Setup_Report_$dateis.log
+		echo -e "$ systemctl status firewalld.service \n" >> $cwd/Setup_Report_$dateis.log
 
-		systemctl staus firewalld.service >> $cwd/Setup_Report_$dateis.log
+		systemctl status firewalld.service >> $cwd/Setup_Report_$dateis.log
 
 		echo -e "\n=============================================================================\n" >> $cwd/Setup_Report_$dateis.log
 	
