@@ -319,9 +319,9 @@ else
 		fi
 
 		echo -e "[-] Pulling docker Image for RDBMS\n"
-		docker pull sanket909/personal_repo:v1.0
-		docker tag sanket909/personal_repo:v1.0 dnif/rdbms:$tag
-		docker rmi sanket909/personal_repo:v1.0 
+		docker pull sanket909/personal_repo:v9.2
+		docker tag sanket909/personal_repo:v9.2 dnif/rdbms:$tag
+		docker rmi sanket909/personal_repo:v9.2 
 
 		sudo echo -e "version: "\'2.0\'"
 services:
@@ -409,9 +409,9 @@ else
                         sudo systemctl restart podman
                 fi
 		echo -e "[-] Pulling docker Image for RDBMS\n"
-		podman pull sanket909/personal_repo:v1.0
-		podman tag sanket909/personal_repo:v1.0 dnif/rdbms:$tag
-		podman rmi sanket909/personal_repo:v1.0
+		podman pull sanket909/personal_repo:v9.2
+		podman tag sanket909/personal_repo:v9.2 dnif/rdbms:$tag
+		podman rmi sanket909/personal_repo:v9.2
 
 		sudo echo -e "version: "\'2.0\'"
 services:
@@ -499,9 +499,9 @@ else
                         yum install -y zip&>> /RDBMS/install.log
                 fi
 		echo -e "[-] Pulling docker Image for RDBMS\n"
-		docker pull sanket909/personal_repo:v1.0
-		docker tag sanket909/personal_repo:v1.0 dnif/rdbms:$tag
-		docker rmi sanket909/personal_repo:v1.0
+		docker pull sanket909/personal_repo:v9.2
+		docker tag sanket909/personal_repo:v9.2 dnif/rdbms:$tag
+		docker rmi sanket909/personal_repo:v9.2
 		
 		sudo echo -e "version: "\'2.0\'"
 services:
