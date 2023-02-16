@@ -90,28 +90,33 @@ pipo_connectivity() {
 
 	echo -e "\nTesting port connectivity with Core IP:\n" | tee -a ./prechecks.log
 	cip=$(cat components.txt | grep -i "core" | awk '{ print $2 }')	
-	chn=$(cat components.txt | grep -i "core" | awk '{ print $3 }')
-	printf "Connectivity with $cip on port 1443\n" | tee -a ./prechecks.log
-		nc -z -v $cip 1443 
-		nc -z -v $cip 1443 &>> prechecks.log
-	printf "Connectivity with $cip on port 8086\n" | tee -a ./prechecks.log
-		nc -z -v $cip 8086 
-		nc -z -v $cip 8086 &>> prechecks.log
-	printf "Connectivity with $cip on port 8765\n" | tee -a ./prechecks.log
-		nc -z -v $cip 8765 
-		nc -z -v $cip 8765 &>> prechecks.log
+	for k in $cip;
+	do
+		printf "Connectivity with $k on port 1443\n" | tee -a ./prechecks.log
+			nc -z -v $k 1443 
+			nc -z -v $k 1443 &>> prechecks.log
+		printf "Connectivity with $k on port 8086\n" | tee -a ./prechecks.log
+			nc -z -v $k 8086 
+			nc -z -v $k 8086 &>> prechecks.log
+		printf "Connectivity with $k on port 8765\n" | tee -a ./prechecks.log
+			nc -z -v $k 8765 
+			nc -z -v $k 8765 &>> prechecks.log
+	done
 	
 	echo -e "\nTesting port connectivity with Core Hostname:\n" | tee -a ./prechecks.log
-
-	printf "Connectivity with $chn on port 1443\n" | tee -a ./prechecks.log
-		nc -z -v $chn 1443 
-		nc -z -v $chn 1443 &>> prechecks.log
-	printf "Connectivity with $chn on port 8086\n" | tee -a ./prechecks.log
-		nc -z -v $chn 8086 
-		nc -z -v $chn 8086 &>> prechecks.log
-	printf "Connectivity with $chn on port 8765\n" | tee -a ./prechecks.log
-		nc -z -v $chn 8765 
-		nc -z -v $chn 8765 &>> prechecks.log
+	chn=$(cat components.txt | grep -i "core" | awk '{ print $3 }')
+	for l in $chn;
+	do
+		printf "Connectivity with $l on port 1443\n" | tee -a ./prechecks.log
+			nc -z -v $l 1443 
+			nc -z -v $l 1443 &>> prechecks.log
+		printf "Connectivity with $l on port 8086\n" | tee -a ./prechecks.log
+			nc -z -v $l 8086 
+			nc -z -v $l 8086 &>> prechecks.log
+		printf "Connectivity with $l on port 8765\n" | tee -a ./prechecks.log
+			nc -z -v $l 8765 
+			nc -z -v $l 8765 &>> prechecks.log
+	done
 
 }
 
