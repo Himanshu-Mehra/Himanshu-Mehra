@@ -33,23 +33,77 @@ else
 			read -r scope
 			done
 
-		echo -e "\n[-] Unique dates present in the $scope backup path: \n-------------------"
-		find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "*.zip" | awk -F'/' '{print $(NF)}' | sort | uniq
-		day=""
-		while [[ ! $day ]]; do
-			echo -e "\n[-] Enter the date in following format YYYYMMDD e.g.(20221231):  \c"
-			read -r day
+		echo -e "\n[-] Unique dates present in the $scope $recovery path: \n-------------------"
+		allzip=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "*.zip" | awk -F'/' '{print $(NF)}' | sort | uniq)
+		echo -e "$allzip"
+
+		echo -e "\n[-] Data can be archived in 2 ways:"
+		echo -e "    [1] All the Streams Data in $scope for a particular day"
+		echo -e "    [2] All the Streams Data in $scope for all the days\n-------------------"
+
+		OPT=""
+		while [[ ! $OPT =~ ^[1-2] ]]; do
+			echo -e "Pick the number corresponding to the option (1 - 2):  \c"
+			read -r OPT
 			done
+		case "${OPT^^}" in
+			1)
+		    	day=""
 
-		dfi_streams=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
+				while [[ ! $day ]]; do
+					echo -e "\n[-] Enter the date in following format YYYYMMDD e.g.(20221231):  \c"
+					read -r day
+					done
 
-		echo -e "\n[-] Data for $day found in following paths: \n-------------------\n$dfi_streams\n"
+				dfi_streams=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
 
-		echo -e "[-] Creating tar file for the files found: \n-------------------"
+				echo -e "\n[-] Data for $day found in following paths: \n-------------------\n$dfi_streams\n"
 
-		tar -cvzf $day"_"$scope.tar.gz $dfi_streams
+				sizecal=$(echo "$(expr $(du -s $dfi_streams | awk '{sum+=$1} END {print sum}') / 1024) MB")
 
-		echo -e "\n-------------------\nArchival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\n"
+				echo -e "[-] Total Size of the files: \n-------------------\n$sizecal\n"
+
+				echo -e "[-] Creating tar file of the files found: \n-------------------"
+
+				tar -cvzf $day"_"$scope.tar.gz $dfi_streams
+
+				echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
+
+				echo -e "MD5SUM : \c" >> $day"_"$scope.txt
+				md5sum $day"_"$scope.tar.gz >> $day"_"$scope.txt
+
+				echo -e "MD5SUM : \c" >> tar_md5sum.log
+				md5sum $day"_"$scope.tar.gz >> tar_md5sum.log
+		    	;;
+		  	2)
+				azday=$(echo -e "$allzip" | sed 's/Day=//; s/\.zip$//')
+
+				for day in $azday;
+				do
+					dfi_streams=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
+
+					echo -e "\n[-] Data for $day found in following paths: \n-------------------\n$dfi_streams\n"
+
+					sizecal=$(echo "$(expr $(du -s $dfi_streams | awk '{sum+=$1} END {print sum}') / 1024) MB")
+
+					echo -e "[-] Total Size of the files: \n-------------------\n$sizecal\n"
+
+					echo -e "[-] Creating tar file of the files found: \n-------------------"
+
+					tar -cvzf $day"_"$scope.tar.gz $dfi_streams
+
+					echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
+
+					echo -e "MD5SUM : \c" >> $day"_"$scope.txt
+					md5sum $day"_"$scope.tar.gz >> $day"_"$scope.txt
+
+					echo -e "MD5SUM : \c" >> tar_md5sum.log
+					md5sum $day"_"$scope.tar.gz >> tar_md5sum.log	
+				done
+
+				echo -e "\n[-] Archival Process completed of $recovery for All days, Scope: $scope"
+				;;
+		esac
 	fi
 
 fi
