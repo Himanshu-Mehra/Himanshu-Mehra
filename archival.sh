@@ -69,8 +69,8 @@ else
 
 				echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
 
-				echo -e "MD5SUM : \c" >> $day"_"$scope.txt
-				md5sum $day"_"$scope.tar.gz >> $day"_"$scope.txt
+				echo -e "MD5SUM : \c" >> $day"_"$scope"_md5sum".txt
+				md5sum $day"_"$scope.tar.gz >> $day"_"$scope"_md5sum".txt
 
 				echo -e "MD5SUM : \c" >> tar_md5sum.log
 				md5sum $day"_"$scope.tar.gz >> tar_md5sum.log
@@ -94,8 +94,8 @@ else
 
 					echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
 
-					echo -e "MD5SUM : \c" >> $day"_"$scope.txt
-					md5sum $day"_"$scope.tar.gz >> $day"_"$scope.txt
+					echo -e "MD5SUM : \c" >> $day"_"$scope"_md5sum".txt
+					md5sum $day"_"$scope.tar.gz >> $day"_"$scope"_md5sum".txt
 
 					echo -e "MD5SUM : \c" >> tar_md5sum.log
 					md5sum $day"_"$scope.tar.gz >> tar_md5sum.log	
