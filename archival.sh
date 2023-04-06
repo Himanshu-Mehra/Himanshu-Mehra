@@ -55,7 +55,8 @@ else
 					read -r day
 					done
 
-				dfi_streams=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
+				cd $mountpoint
+				dfi_streams=$(find ./$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
 
 				echo -e "\n[-] Data for $day found in following paths: \n-------------------\n$dfi_streams\n"
 
@@ -65,22 +66,23 @@ else
 
 				echo -e "[-] Creating tar file of the files found: \n-------------------"
 
-				tar -cvzf $day"_"$scope.tar.gz $dfi_streams
+				tar -cvzf $cwd/$day"_"$scope.tar.gz $dfi_streams
 
-				echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
+				echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $cwd/$day"_"$scope.tar.gz)\n"
 
-				echo -e "MD5SUM : \c" >> $day"_"$scope"_md5sum".txt
-				md5sum $day"_"$scope.tar.gz >> $day"_"$scope"_md5sum".txt
+				echo -e "MD5SUM : \c" >> $cwd/$day"_"$scope"_md5sum".txt
+				md5sum $cwd/$day"_"$scope.tar.gz >> $cwd/$day"_"$scope"_md5sum".txt
 
-				echo -e "MD5SUM : \c" >> tar_md5sum.log
-				md5sum $day"_"$scope.tar.gz >> tar_md5sum.log
+				echo -e "MD5SUM : \c" >> $cwd/tar_md5sum.log
+				md5sum $cwd/$day"_"$scope.tar.gz >> $cwd/tar_md5sum.log
 		    	;;
 		  	2)
 				azday=$(echo -e "$allzip" | sed 's/Day=//; s/\.zip$//')
 
+				cd $mountpoint
 				for day in $azday;
 				do
-					dfi_streams=$(find $mountpoint/$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
+					dfi_streams=$(find ./$recovery/DNIF/events/Scope\=$scope/ -type f -name "Day=$day.zip")
 
 					echo -e "\n[-] Data for $day found in following paths: \n-------------------\n$dfi_streams\n"
 
@@ -90,15 +92,15 @@ else
 
 					echo -e "[-] Creating tar file of the files found: \n-------------------"
 
-					tar -cvzf $day"_"$scope.tar.gz $dfi_streams
+					tar -cvzf $cwd/$day"_"$scope.tar.gz $dfi_streams
 
-					echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $day"_"$scope.tar.gz)\n"
+					echo -e "\n[-] Archival Process completed of $recovery for $day, Scope: $scope, Created file: $day"_"$scope.tar.gz\n-------------------\nFile size: $(du -sh $cwd/$day"_"$scope.tar.gz)\n"
 
-					echo -e "MD5SUM : \c" >> $day"_"$scope"_md5sum".txt
-					md5sum $day"_"$scope.tar.gz >> $day"_"$scope"_md5sum".txt
+					echo -e "MD5SUM : \c" >> $cwd/$day"_"$scope"_md5sum".txt
+					md5sum $cwd/$day"_"$scope.tar.gz >> $cwd/$day"_"$scope"_md5sum".txt
 
-					echo -e "MD5SUM : \c" >> tar_md5sum.log
-					md5sum $day"_"$scope.tar.gz >> tar_md5sum.log	
+					echo -e "MD5SUM : \c" >> $cwd/tar_md5sum.log
+					md5sum $cwd/$day"_"$scope.tar.gz >> $cwd/tar_md5sum.log	
 				done
 
 				echo -e "\n[-] Archival Process completed of $recovery for All days, Scope: $scope"
