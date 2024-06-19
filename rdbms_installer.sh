@@ -323,7 +323,7 @@ else
 		docker tag sanket909/personal_repo:v9.2 dnif/rdbms:$tag
 		docker rmi sanket909/personal_repo:v9.2 
 
-		sudo echo -e "version: "\'2.0\'"
+		sudo echo -e "version: "\'2.1\'"
 services:
  ubuntu:
   image: dnif/rdbms:$tag
@@ -503,7 +503,7 @@ else
 		docker tag sanket909/personal_repo:v9.2 dnif/rdbms:$tag
 		docker rmi sanket909/personal_repo:v9.2
 		
-		sudo echo -e "version: "\'2.0\'"
+		sudo echo -e "version: "\'2.1\'"
 services:
  ubuntu:
   image: dnif/rdbms:$tag
